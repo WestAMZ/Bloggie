@@ -55,7 +55,7 @@ namespace Bloggie.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Headin")
+                    b.Property<string>("Heading")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -63,7 +63,7 @@ namespace Bloggie.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("PublishDate")
+                    b.Property<DateTime>("PublishedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ShortDescription")

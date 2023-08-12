@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
+﻿using Bloggie.Web.Models.Domain;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Bloggie.Web.Models.Domain
+namespace Bloggie.Web.Models.ViewModels
 {
-    public class BlogPost
+    public class AddBlogPostRequest
     {
-        public Guid Id { get; set; }
         public string Heading { get; set; }
         public string PageTitle { get; set; }
         public string Content { get; set; }
@@ -14,7 +14,10 @@ namespace Bloggie.Web.Models.Domain
         public DateTime PublishedDate { get; set; }
         public string Author { get; set; }
         public bool Visible { get; set; }
-        public ICollection<Tag> Tags { get; set; }
+        // Display tags
+        public IEnumerable<SelectListItem> Tags { get; set; }
+        // Collect tag
+        public string SelectedTag { get; set; }
 
     }
 }
