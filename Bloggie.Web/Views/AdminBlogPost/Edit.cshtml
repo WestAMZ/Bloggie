@@ -37,6 +37,19 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label">Featured Image Upload</label>
+                <input type="file" id="featuredImageUpload" class="form-control" />
+                @if (Model.FeaturedImageUrl != null)
+                {
+                    <img src="@Model.FeaturedImageUrl" id="featuredImageDisplay" style="display:block;width:300px;" class="rounded d-block mt-4" />
+                }
+                else 
+                {
+                    <img src="" id="featuredImageDisplay" style="display:none;width:300px;" class="rounded d-block mt-4" />
+                }
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Featured Image URL</label>
                 <input type="text" class="form-control" id="featuredImageURL" asp-for="FeaturedImageUrl" />
             </div>
@@ -88,5 +101,32 @@
 @section Scripts {
     <script>
         var editor = new FroalaEditor('#content');
+
+        const feraturedUploadElement = document.getElementById('featuredImageUpload', {
+            imageUploadURL: '/api/images'
+        });
+        const feraturedUploadUrlElement = document.getElementById('featuredImageURL');
+        const feraturedDisplayElement = document.getElementById('featuredImageDisplay');
+
+        async function uploadFeaturedImage(e) {
+
+            let data = new FormData();
+            data.append('file', e.target.files[0]);
+
+            await fetch('/api/images', {
+                method: 'POST',
+                headers: {
+                    'Aceept': '*/*'
+                },
+                body: data
+            }).then(response => response.json())
+                .then(result => {
+                    feraturedUploadUrlElement.value = result.link;
+                    feraturedDisplayElement.src = result.link;
+                    feraturedDisplayElement.style.display = 'block';
+                });
+        }
+
+        feraturedUploadElement.addEventListener('change', uploadFeaturedImage);
     </script>
 }

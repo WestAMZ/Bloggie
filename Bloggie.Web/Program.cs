@@ -1,5 +1,6 @@
 using Bloggie.Web.Data;
 using Bloggie.Web.Repositories;
+using Imagekit;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,8 @@ builder.Services.AddDbContext<BloggieDbContext>(options =>
 
 builder.Services.AddScoped<ITagRepository,TagRepository>();
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+builder.Services.Configure<ImageKitOptions>(builder.Configuration.GetSection("ImageKit"));
+builder.Services.AddScoped<IImageRepository, ImageKitImageRepository>();
 
 var app = builder.Build();
 
