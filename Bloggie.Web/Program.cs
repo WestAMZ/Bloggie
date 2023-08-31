@@ -20,6 +20,16 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AuthDbContext>();
 
+builder.Services.Configure<IdentityOptions>(option =>
+{
+    option.Password.RequireDigit = true;
+    option.Password.RequireLowercase = true;
+    option.Password.RequireNonAlphanumeric = true;
+    option.Password.RequireUppercase = true;
+    option.Password.RequiredLength = 6;
+    option.Password.RequiredUniqueChars = 1;
+});
+
 builder.Services.AddScoped<ITagRepository,TagRepository>();
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 builder.Services.Configure<ImageKitOptions>(builder.Configuration.GetSection("ImageKit"));
