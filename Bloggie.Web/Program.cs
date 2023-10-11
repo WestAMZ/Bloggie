@@ -34,6 +34,7 @@ builder.Services.AddScoped<ITagRepository,TagRepository>();
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 builder.Services.Configure<ImageKitOptions>(builder.Configuration.GetSection("ImageKit"));
 builder.Services.AddScoped<IImageRepository, ImageKitImageRepository>();
+builder.Services.AddScoped<IBlogPostLikeRepository, BlogPostLikeRepository>();
 
 var app = builder.Build();
 
