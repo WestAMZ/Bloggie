@@ -40,13 +40,13 @@
 </div>
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-6">
-            @if(Model != null && Model.BlogPosts.Any())
+    <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
+        @if(Model != null && Model.BlogPosts.Any())
+        {
+            foreach (var blogPost in Model.BlogPosts)
             {
-                foreach (var blogPost in Model.BlogPosts)
-                {
-                    <div class="mb-5 bg-light box-shadow p-5">
+                <div class="col">
+                    <div class="h-100 bg-light box-shadow p-4 mb-0">
                         <img src="@blogPost.FeaturedImageUrl" alt="@blogPost.Heading" 
                              class="mb-2 d-block img-fluid" />
                         <h2 class="mb-4">@blogPost.Heading</h2>
@@ -65,10 +65,10 @@
 
                         <p class="mb-4">@blogPost.ShortDescription</p>
 
-                        <a asp-area="" asp-controller="Blogs" asp-action="index" asp-route-urlHandle="@blogPost.UrlHandle"  class="btn btn-dark">Read More</a>
+                        <a asp-area="" asp-controller="Blogs" asp-action="index" asp-route-urlHandle="@blogPost.UrlHandle" class="btn btn-dark">Read More</a>
                     </div>
-                }
+                </div>
             }
-        </div>
+        }
     </div>
 </div>

@@ -40,6 +40,16 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<BloggieDbContext>();
+    await context.Database.MigrateAsync();
+
+    var AuthContext = scope.ServiceProvider.GetRequiredService<AuthDbContext>();
+    await AuthContext.Database.MigrateAsync();
+
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
